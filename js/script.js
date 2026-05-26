@@ -1,6 +1,74 @@
 $(document).ready(function(){
 
-	// Login popup: fade open via .login-button, fade close via cancel / backdrop / Esc.
+
+	if ($('.full__image--slider').length) {
+		$('.full__image--slider .slider').slick({
+			variableWidth:true,
+			dots:true,
+			arrows:true,
+			swipe:true,
+			swipeToSlide:true,
+			appendArrows:$('.full__image--slider .dots__box'),
+			appendDots:$('.full__image--slider .dots__box'),
+			responsive: [
+		    {
+		      breakpoint: 1200,
+		      settings: {
+		      	variableWidth:false,
+		      	slidesToShow:3,
+		      },
+		      
+		    },
+		    {
+		      breakpoint: 991,
+		      settings: {
+		      	variableWidth:false,
+		      	slidesToShow:2,
+		      },
+		      
+		    },
+		    {
+		      breakpoint: 767,
+		      settings: {
+		      	variableWidth:false,
+		      	slidesToShow:1,
+		      	centerMode:true,
+		      	centerPadding:"15%"
+		      },
+		      
+		    }
+		  ]
+		})
+	}
+
+	$('.faq__big .outer__faq>.elem>.head').on('click' ,function(e){
+		e.preventDefault();
+		if ($(this).closest(".elem").hasClass('opened')) {
+			$(this).closest(".elem").removeClass("opened");
+			$(this).closest(".elem").find('>.content').slideUp(300);
+		} else {
+			$(this).closest('.faq__big').find(".elem").removeClass('opened');
+			$(this).closest(".faq__big").find(".elem").find(".content").slideUp(300);
+			$(this).closest(".elem").addClass("opened");
+			$(this).closest(".elem").find('>.content').slideDown(300);
+		}
+	});
+
+	$('.faq__big .outer__faq>.elem .content .head').on('click' ,function(e){
+		e.preventDefault();
+		if ($(this).closest(".elem").hasClass('opened')) {
+			$(this).closest(".elem").removeClass("opened");
+			$(this).closest(".elem").find('>.content').slideUp(300);
+		} else {
+			$(this).closest('.content').find(".elem").removeClass('opened');
+			$(this).closest(".content").find(".elem").find(".content").slideUp(300);
+			$(this).closest(".elem").addClass("opened");
+			$(this).closest(".elem").find('>.content').slideDown(300);
+		}
+	});
+
+
+
 	function openLogin(){
 		$('.login-popup').stop(true, true).css('display', 'flex').hide().fadeIn(250);
 		$('body,html').css('overflow-y', 'hidden');
